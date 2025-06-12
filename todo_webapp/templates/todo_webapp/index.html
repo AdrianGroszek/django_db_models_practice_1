@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+  Zadaniowa apka
+{% endblock %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static 'todo_webapp/index.css' %}" >
+{% endblock %}
+
+{% block content %}
+    <div class="text-container">
+      <h1 class="heading">TaskMaster</h1>
+      <p class="description-text">
+          Organizuj swoje życie z TaskMaster - nowoczesną aplikacją do zarządzania zadaniami. 
+          Twórz listy TODO, kategoryzuj zadania według priorytetów i śledź swoje postępy w prosty i intuicyjny sposób. 
+          Niezależnie od tego, czy planujesz dzień pracy, czy organizujesz projekty domowe, TaskMaster pomoże Ci zachować porządek. 
+          Dodawaj komentarze do zadań, ustawiaj terminy wykonania i nigdy więcej nie przegap ważnych spraw. 
+          Zacznij już dziś i poczuj satysfakcję z wypełniania kolejnych zadań. 
+          Produktywność nigdy nie była tak prosta!
+      </p>
+      <a href="{% url 'todos-list-page' %}" class="cta-button">Zacznij organizować</a>
+    </div>
+    
+    <div class="features">
+        <div class="feature">
+            <h3>📝 Proste zarządzanie</h3>
+            <p>Twórz, edytuj i usuwaj zadania jednym kliknięciem</p>
+        </div>
+        <div class="feature">
+            <h3>📊 Kategorie i priorytety</h3>
+            <p>Organizuj zadania według własnych potrzeb</p>
+        </div>
+        <div class="feature">
+            <h3>⏰ Terminy wykonania</h3>
+            <p>Nigdy nie przegap ważnych deadline'ów</p>
+        </div>
+    </div>
+{% endblock %}

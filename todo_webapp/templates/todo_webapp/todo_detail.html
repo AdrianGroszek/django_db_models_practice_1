@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+  Task detail
+{% endblock %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static 'todo_webapp/todo_detail.css' %}" >
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+        <a href="{% url 'todos-list-page' %}" class="back-button">← Powrót do listy</a>
+
+        <div class="todo-card">
+            <div class="todo-header">
+                <h1 class="todo-title">{{ task.title }}</h1>
+                {% if task.is_completed %}
+                  <div class="status-badge status-completed">✓ Zakończone</div>
+                {% else %}
+                  <div class="status-badge status-pending">📋 Oczekujące</div>
+                {% endif %}
+            </div>
+
+            <div class="todo-meta">
+                <div class="meta-item">
+                    <div class="meta-label">👤 Autor</div>
+                    <div class="meta-value">{{ task.author }}</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">🔥 Priorytet</div>
+                    <div class="meta-value">
+                        <span class="priority-badge {{ task.get_priority_class }}">{{ task.get_priority_label }} ({{ task.priority }}/5)</span>
+                    </div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">📅 Data utworzenia</div>
+                    <div class="meta-value">{{ task.created_at }}</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">⏰ Termin wykonania</div>
+                    <div class="meta-value">{{ task.due_date }}</div>
+                </div>
+            </div>
+
+            <div class="categories-container">
+                <div class="section-title">📁 Kategorie</div>
+                <div class="categories-list">
+                    {% for cat in task.category.all %}
+                      <span class="category-tag">📁 {{ cat.category }}</span>
+                    {% endfor %} 
+                </div>
+            </div>
+
+            <div class="description-section">
+                <div class="section-title">📝 Opis zadania</div>
+                <div class="description-text">
+                    {{ task.description }}
+                </div>
+            </div>
+
+            <div class="actions-section">
+                <a href="" class="btn btn-edit">✏️ Edytuj</a>
+                <button class="btn btn-complete">✅ Oznacz jako ukończone</button>
+                <a href="" class="btn btn-delete">🗑️ Usuń</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

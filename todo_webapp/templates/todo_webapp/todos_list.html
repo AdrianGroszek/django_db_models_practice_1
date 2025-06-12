@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+  Yours tasks
+{% endblock %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static 'todo_webapp/todos_list.css' %}" >
+{% endblock %}
+
+{% block content %}
+  <div class="todo-list-section">
+    <h1>Twoja lista zadań</h1>
+    <p>Masz do zrobienia 7 zadań</p>
+    <ul class="todo-list">
+      {% for task in tasks %}
+        <li class="todo-item">
+          <a href="{% url 'single-todo-page' task.slug %}" class="todo-link">
+            <div class="todo-header">
+              <h3 class="todo-title">{{ task.title }}</h3>
+              {% if task.is_completed %}
+                <div class="todo-status completed">✓ Zakończone</div>
+              {% else %}
+                <div class="todo-status pending">⏳ W trakcie</div>
+              {% endif %}
+            </div>
+            <div class="todo-details">
+              <div class="todo-meta">
+                <span class="author">👤 {{ task.author }}</span>
+                {% for cat in task.category.all %}
+                  <span class="category">📁 {{ cat.category }}</span>
+                {% endfor %} 
+                <span class="priority {{ task.get_priority_class }}">{{ task.get_priority_label }}</span>                 
+              </div>
+              <div class="todo-dates">
+                <span class="created">Utworzono: {{ task.created_at }}</span>
+                <span class="due-date">Termin: {{ task.due_date }}</span>
+              </div>
+            </div>
+          </a>
+        </li>
+      {% endfor%}
+    </ul>
+  </div>
+{% endblock %}
